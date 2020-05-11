@@ -19,7 +19,7 @@ warnings.filterwarnings('ignore')
 path = pathlib.Path(dj.config['custom'].get('intracellular_directory')).as_posix()
 fnames = os.listdir(path)
 
-for fname in fnames[:3]:
+for fname in fnames:
     try:
         nwb = h5.File(os.path.join(path, fname), 'r')
         print(f'File loaded: {fname}')
@@ -166,3 +166,6 @@ for fname in fnames[:3]:
                                         hemisphere=hemisphere), ignore_extra_fields=True)
 
     nwb.close()
+
+
+intracellular.MembranePotential.populate()
