@@ -39,10 +39,12 @@ class Device(dj.AttributeAdapter):
     attribute_type = 'longblob'
 
     def put(self, nwb_device):
-        return {'name': nwb_device.name}
+        return {'name': nwb_device.name, 'object_id': nwb_device.object_id}
 
     def get(self, device_dict):
-        return pynwb.device.Device(name=device_dict['name'])
+        nwb_device = pynwb.device.Device(name=device_dict['name'])
+        nwb_device.__dict__['_Container__object_id'] = device_dict['object_id']  # preserve object_id
+        return nwb_device
 
 
 class IntracellularElectrode(dj.AttributeAdapter):
@@ -52,15 +54,17 @@ class IntracellularElectrode(dj.AttributeAdapter):
     def put(self, electrode):
         return dict(name=electrode.name, device=Device().put(electrode.device),
                     description=electrode.description, filtering=electrode.filtering,
-                    location=electrode.location)
+                    location=electrode.location, object_id=electrode.object_id)
 
     def get(self, ic_electrode_dict):
-        return pynwb.icephys.IntracellularElectrode(
+        electrode = pynwb.icephys.IntracellularElectrode(
             name=ic_electrode_dict['name'],
             device=Device().get(ic_electrode_dict['device']),
             description=ic_electrode_dict['description'],
             filtering=ic_electrode_dict['filtering'],
             location=ic_electrode_dict['location'])
+        electrode.__dict__['_Container__object_id'] = ic_electrode_dict['object_id']  # preserve object_id
+        return electrode
 
 
 class PatchClampSeries(dj.AttributeAdapter):
