@@ -18,7 +18,7 @@ class WholeCellDevice(dj.Lookup):
     definition = """ # Description of the device used for electrical stimulation
     device_name: varchar(32)
     ---
-    nwb_device: <device>
+    nwb_device: <device>  # pynwb.device.Device, longblob
     """
 
 
@@ -41,7 +41,7 @@ class IntracellularElectrode(dj.Manual):
     -> BrainLocation
     ---
     -> WholeCellDevice
-    ic_electrode: <ic_electrode>
+    ic_electrode: <ic_electrode>  # pynwb.icephys.IntracellularElectrode, longblob
     """
 
 
@@ -61,7 +61,7 @@ class MembranePotential(dj.Imported):
     definition = """
     -> Cell
     ---
-    nwb_patch_clamp: <patch_clamp_series>
+    nwb_patch_clamp: <patch_clamp_series>  # pynwb.icephys.PatchClampSeries, filepath
     """
 
     def make(self, key):

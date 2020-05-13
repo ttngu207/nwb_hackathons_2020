@@ -28,7 +28,7 @@ class Session(dj.Manual):
     session_time: datetime    # session time
     ---
     session_note = "" : varchar(256) 
-    nwb_file: <nwb_file>
+    nwb_file: <nwb_file>  # pynwb.file.NWBFile, filepath
     """
 
     class Experimenter(dj.Part):
