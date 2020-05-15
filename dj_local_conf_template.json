@@ -1,0 +1,30 @@
+{
+    "database.host": "database_host",
+    "database.user": "username",
+	"database.password": "password",
+    "database.port": 3306,
+    "connection.init_function": null,
+    "database.reconnect": false,
+    "loglevel": "INFO",
+    "safemode": true,
+    "display.limit": 7,
+    "display.width": 14,
+    "display.show_tuple_count": true,
+    "enable_python_native_blobs": true,
+    "custom": {
+        "database.prefix": "nwb_demo_",
+        "intracellular_directory": "/data/ic_data_dir"
+    },
+    "stores": {
+        "nwb_store": {
+            "protocol": "file",
+            "location": "./nwb_store",
+            "stage": "./nwb_store"
+        },
+        "nwbstore": {
+            "protocol": "file",
+            "location": "./nwb_store/demo",
+            "stage": "./nwb_store/demo"
+        }
+    }
+}
